@@ -23,6 +23,8 @@
 
 #include "xos/graphic/surface/image/interface.hpp"
 #include "xos/graphic/surface/image/shape/bresenham_line.hpp"
+#include "xos/graphic/surface/image/shape/midpoint_circle.hpp"
+#include "xos/graphic/surface/image/shape/midpoint_ellipse.hpp"
 
 namespace xos {
 namespace graphic {
@@ -88,8 +90,8 @@ public:
         eError error = e_ERROR_NONE;
         tImageInterface* image = 0;
         if ((image = this->image())) {
-            //midpoint_circle_image circle(*image);
-            //circle.plot_circle(*image, x,y, r, o);
+            shape::midpoint_circle circle(*image);
+            circle.plot_circle(*image, x,y, r, o);
         }
         return error;
     }
@@ -98,8 +100,8 @@ public:
         eError error = e_ERROR_NONE;
         tImageInterface* image = 0;
         if ((image = this->image())) {
-            //filled_midpoint_circle_image circle(*image);
-            //circle.plot_circle(*image, x,y, r, o);
+            shape::filled_midpoint_circle circle(*image);
+            circle.plot_circle(*image, x,y, r, o);
         }
         return error;
     }
@@ -108,8 +110,8 @@ public:
         eError error = e_ERROR_NONE;
         tImageInterface* image = 0;
         if ((image = this->image())) {
-            //hollow_midpoint_circle_image circle(*image);
-            //circle.plot_circle(*image, x,y, r, o);
+            shape::hollow_midpoint_circle circle(*image);
+            circle.plot_circle(*image, x,y, r, o);
         }
         return error;
     }
@@ -119,8 +121,8 @@ public:
         eError error = e_ERROR_NONE;
         tImageInterface* image = 0;
         if ((image = this->image())) {
-            //midpoint_ellipse_image ellipse(*image);
-            //ellipse.plot_ellipse(*image, x,y, w,h, q);
+            shape::midpoint_ellipse ellipse(*image);
+            ellipse.plot_ellipse(*image, x,y, w,h, q);
         }
         return error;
     }
@@ -129,8 +131,8 @@ public:
         eError error = e_ERROR_NONE;
         tImageInterface* image = 0;
         if ((image = this->image())) {
-            //filled_midpoint_ellipse_image ellipse(*image);
-            //ellipse.plot_ellipse(*image, x,y, w,h, q);
+            shape::filled_midpoint_ellipse ellipse(*image);
+            ellipse.plot_ellipse(*image, x,y, w,h, q);
         }
         return error;
     }
@@ -139,8 +141,8 @@ public:
         eError error = e_ERROR_NONE;
         tImageInterface* image = 0;
         if ((image = this->image())) {
-            //hollow_midpoint_ellipse_image ellipse(*image);
-            //ellipse.plot_ellipse(*image, x,y, w,h, q);
+            shape::hollow_midpoint_ellipse ellipse(*image);
+            ellipse.plot_ellipse(*image, x,y, w,h, q);
         }
         return error;
     }
