@@ -13,53 +13,69 @@
 /// or otherwise) arising in any way out of the use of this software, 
 /// even if advised of the possibility of such damage.
 ///
-///   File: bresenham_line.hpp
+///   File: pixel.hpp
 ///
 /// Author: $author$
-///   Date: 6/20/2018
+///   Date: 6/23/2018
 ///////////////////////////////////////////////////////////////////////
-#ifndef _XOS_GRAPHIC_SURFACE_IMAGE_SHAPE_BRESENHAM_LINE_HPP
-#define _XOS_GRAPHIC_SURFACE_IMAGE_SHAPE_BRESENHAM_LINE_HPP
+#ifndef _XOS_GRAPHIC_SURFACE_IMAGE_QT_PIXEL_HPP
+#define _XOS_GRAPHIC_SURFACE_IMAGE_QT_PIXEL_HPP
 
-#include "xos/graphic/surface/image/shape/extend.hpp"
-#include "xos/graphic/surface/image/bresenham_line.hpp"
+#include "xos/graphic/surface/image/pixel/extend.hpp"
+#include "xos/gui/qt/Qt.hpp"
 
 namespace xos {
 namespace graphic {
 namespace surface {
 namespace image {
-namespace shape {
+namespace qt {
 
-typedef image::bresenham_linet
-<shape::extend, image::interface> bresenham_line_extends;
 ///////////////////////////////////////////////////////////////////////
-///  Class: bresenham_line
+///  Class: pixel_interfacet
 ///////////////////////////////////////////////////////////////////////
-class _EXPORT_CLASS bresenham_line: public bresenham_line_extends {
+template <class TImplements = pixel::interface>
+
+class _EXPORT_CLASS pixel_interfacet: virtual public TImplements {
 public:
-    typedef bresenham_line_extends extends;
+    typedef TImplements implements;
 
-    bresenham_line(tImageInterface& image): extends(image) {
-    }
-    virtual ~bresenham_line() {
-    }
-
-    virtual void draw_line
-    (tImageInterface &image, tInt x1,tInt y1, tInt x2,tInt y2) {
-        bresenham_line_drawt<extends, tPixel, tInt>(*this, image, x1,y1, x2,y2);
-    }
-    virtual void draw_triangle
-    (tImageInterface &image, tInt x1,tInt y1, tInt x2,tInt y2, tInt x3,tInt y3) {
-        bresenham_line_drawt<extends, tPixel, tInt>(*this, image, x1,y1, x2,y2);
-        bresenham_line_drawt<extends, tPixel, tInt>(*this, image, x2,y2, x3,y3);
-        bresenham_line_drawt<extends, tPixel, tInt>(*this, image, x3,y3, x1,y1);
-    }
+    virtual operator const QColor&() const = 0;
 };
+typedef pixel_interfacet<> pixel_interface;
 
-} /// namespace shape
+///////////////////////////////////////////////////////////////////////
+///  Class: pixelt
+///////////////////////////////////////////////////////////////////////
+template
+<class TImplements = pixel_interface, class TExtends = pixel::extend>
+
+class _EXPORT_CLASS pixelt: virtual public TImplements, public TExtends {
+public:
+    typedef TImplements implements;
+    typedef TExtends extends;
+
+    pixelt(int r, int g, int b, int a): extends(r,g,b,a), qColor_(r,g,b,a) {
+    }
+    pixelt(int r, int g, int b): extends(r,g,b), qColor_(r,g,b) {
+    }
+    pixelt(): qColor_(0,0,0) {
+    }
+    virtual ~pixelt() {
+    }
+
+    virtual operator const QColor&() const {
+        return qColor_;
+    }
+
+protected:
+    QColor qColor_;
+};
+typedef pixelt<> pixel;
+
+} /// namespace qt
 } /// namespace image
 } /// namespace surface
 } /// namespace graphic
 } /// namespace xos
 
-#endif /// _XOS_GRAPHIC_SURFACE_IMAGE_SHAPE_BRESENHAM_LINE_HPP 
+#endif /// _XOS_GRAPHIC_SURFACE_IMAGE_QT_PIXEL_HPP 

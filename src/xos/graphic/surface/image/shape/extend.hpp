@@ -13,16 +13,15 @@
 /// or otherwise) arising in any way out of the use of this software, 
 /// even if advised of the possibility of such damage.
 ///
-///   File: bresenham_line.hpp
+///   File: extend.hpp
 ///
 /// Author: $author$
 ///   Date: 6/20/2018
 ///////////////////////////////////////////////////////////////////////
-#ifndef _XOS_GRAPHIC_SURFACE_IMAGE_SHAPE_BRESENHAM_LINE_HPP
-#define _XOS_GRAPHIC_SURFACE_IMAGE_SHAPE_BRESENHAM_LINE_HPP
+#ifndef _XOS_GRAPHIC_SURFACE_IMAGE_SHAPE_EXTEND_HPP
+#define _XOS_GRAPHIC_SURFACE_IMAGE_SHAPE_EXTEND_HPP
 
-#include "xos/graphic/surface/image/shape/extend.hpp"
-#include "xos/graphic/surface/image/bresenham_line.hpp"
+#include "xos/graphic/surface/image/shape/interface.hpp"
 
 namespace xos {
 namespace graphic {
@@ -30,31 +29,48 @@ namespace surface {
 namespace image {
 namespace shape {
 
-typedef image::bresenham_linet
-<shape::extend, image::interface> bresenham_line_extends;
 ///////////////////////////////////////////////////////////////////////
-///  Class: bresenham_line
+///  Class: extendt
 ///////////////////////////////////////////////////////////////////////
-class _EXPORT_CLASS bresenham_line: public bresenham_line_extends {
+template
+<class TImageInterface = image::interface,
+ class TImplements = shape::interface, class TExtends = xos::base>
+
+class _EXPORT_CLASS extendt: virtual public TImplements, public TExtends {
 public:
-    typedef bresenham_line_extends extends;
+    typedef TImplements implements;
+    typedef TExtends extends;
 
-    bresenham_line(tImageInterface& image): extends(image) {
+    typedef TImageInterface tImageInterface;
+
+    extendt(tImageInterface& image): image_(image) {
     }
-    virtual ~bresenham_line() {
+    virtual ~extendt() {
     }
 
-    virtual void draw_line
-    (tImageInterface &image, tInt x1,tInt y1, tInt x2,tInt y2) {
-        bresenham_line_drawt<extends, tPixel, tInt>(*this, image, x1,y1, x2,y2);
+    virtual eError plot(tImageInterface& image, tOffset x, tOffset y) {
+        eError error = image.plot(x,y);
+        return error;
     }
-    virtual void draw_triangle
-    (tImageInterface &image, tInt x1,tInt y1, tInt x2,tInt y2, tInt x3,tInt y3) {
-        bresenham_line_drawt<extends, tPixel, tInt>(*this, image, x1,y1, x2,y2);
-        bresenham_line_drawt<extends, tPixel, tInt>(*this, image, x2,y2, x3,y3);
-        bresenham_line_drawt<extends, tPixel, tInt>(*this, image, x3,y3, x1,y1);
+    virtual eError fill
+    (tImageInterface& image, tOffset x, tOffset y, tSize w, tSize h) {
+        eError error = image.fill(x,y, w,h);
+        return error;
     }
+
+    virtual eError plot(tOffset x, tOffset y) {
+        eError error = image_.plot(x,y);
+        return error;
+    }
+    virtual eError fill(tOffset x, tOffset y, tSize w, tSize h) {
+        eError error = image_.fill(x,y, w,h);
+        return error;
+    }
+
+protected:
+    tImageInterface& image_;
 };
+typedef extendt<> extend;
 
 } /// namespace shape
 } /// namespace image
@@ -62,4 +78,4 @@ public:
 } /// namespace graphic
 } /// namespace xos
 
-#endif /// _XOS_GRAPHIC_SURFACE_IMAGE_SHAPE_BRESENHAM_LINE_HPP 
+#endif /// _XOS_GRAPHIC_SURFACE_IMAGE_SHAPE_EXTEND_HPP 

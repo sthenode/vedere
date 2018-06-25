@@ -21,7 +21,7 @@
 #ifndef _XOS_GRAPHIC_SURFACE_IMAGE_SHAPE_MIDPOINT_CIRCLE_HPP
 #define _XOS_GRAPHIC_SURFACE_IMAGE_SHAPE_MIDPOINT_CIRCLE_HPP
 
-#include "xos/graphic/surface/image/shape/base.hpp"
+#include "xos/graphic/surface/image/shape/extend.hpp"
 #include "xos/graphic/surface/image/midpoint_circle.hpp"
 #include "xos/graphic/surface/image/hollow_midpoint_circle.hpp"
 
@@ -32,7 +32,7 @@ namespace image {
 namespace shape {
 
 typedef image::midpoint_circlet
-<shape::base, image::interface> midpoint_circle_extends;
+<shape::extend, image::interface> midpoint_circle_extends;
 ///////////////////////////////////////////////////////////////////////
 ///  Class: midpoint_circle
 ///////////////////////////////////////////////////////////////////////
@@ -51,7 +51,7 @@ public:
 };
 
 typedef image::filled_midpoint_circlet
-<shape::base, image::interface> filled_midpoint_circle_extends;
+<shape::extend, image::interface> filled_midpoint_circle_extends;
 ///////////////////////////////////////////////////////////////////////
 ///  Class: filled_midpoint_circle
 ///////////////////////////////////////////////////////////////////////
@@ -71,7 +71,7 @@ public:
 };
 
 typedef image::hollow_midpoint_circlet
-<shape::base, image::interface> hollow_midpoint_circle_extends;
+<shape::extend, image::interface> hollow_midpoint_circle_extends;
 ///////////////////////////////////////////////////////////////////////
 ///  Class: hollow_midpoint_circle
 ///////////////////////////////////////////////////////////////////////

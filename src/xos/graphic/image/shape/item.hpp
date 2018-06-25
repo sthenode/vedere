@@ -13,53 +13,47 @@
 /// or otherwise) arising in any way out of the use of this software, 
 /// even if advised of the possibility of such damage.
 ///
-///   File: bresenham_line.hpp
+///   File: item.hpp
 ///
 /// Author: $author$
-///   Date: 6/20/2018
+///   Date: 6/23/2018
 ///////////////////////////////////////////////////////////////////////
-#ifndef _XOS_GRAPHIC_SURFACE_IMAGE_SHAPE_BRESENHAM_LINE_HPP
-#define _XOS_GRAPHIC_SURFACE_IMAGE_SHAPE_BRESENHAM_LINE_HPP
+#ifndef _XOS_GRAPHIC_IMAGE_SHAPE_ITEM_HPP
+#define _XOS_GRAPHIC_IMAGE_SHAPE_ITEM_HPP
 
-#include "xos/graphic/surface/image/shape/extend.hpp"
-#include "xos/graphic/surface/image/bresenham_line.hpp"
+#include "xos/graphic/image/shape/interface.hpp"
+#include "xos/base/linked/item.hpp"
 
 namespace xos {
 namespace graphic {
-namespace surface {
 namespace image {
 namespace shape {
 
-typedef image::bresenham_linet
-<shape::extend, image::interface> bresenham_line_extends;
+class _EXPORT_CLASS item;
+typedef linked::itemt<item> item_extends;
 ///////////////////////////////////////////////////////////////////////
-///  Class: bresenham_line
+///  Class: item
 ///////////////////////////////////////////////////////////////////////
-class _EXPORT_CLASS bresenham_line: public bresenham_line_extends {
+class _EXPORT_CLASS item: public item_extends {
 public:
-    typedef bresenham_line_extends extends;
+    typedef item_extends extends;
 
-    bresenham_line(tImageInterface& image): extends(image) {
+    item(interface& shape): shape_(shape) {
     }
-    virtual ~bresenham_line() {
+    virtual ~item() {
     }
 
-    virtual void draw_line
-    (tImageInterface &image, tInt x1,tInt y1, tInt x2,tInt y2) {
-        bresenham_line_drawt<extends, tPixel, tInt>(*this, image, x1,y1, x2,y2);
+    virtual interface& shape() const {
+        return (interface&)shape_;
     }
-    virtual void draw_triangle
-    (tImageInterface &image, tInt x1,tInt y1, tInt x2,tInt y2, tInt x3,tInt y3) {
-        bresenham_line_drawt<extends, tPixel, tInt>(*this, image, x1,y1, x2,y2);
-        bresenham_line_drawt<extends, tPixel, tInt>(*this, image, x2,y2, x3,y3);
-        bresenham_line_drawt<extends, tPixel, tInt>(*this, image, x3,y3, x1,y1);
-    }
+
+protected:
+    interface& shape_;
 };
 
 } /// namespace shape
 } /// namespace image
-} /// namespace surface
 } /// namespace graphic
 } /// namespace xos
 
-#endif /// _XOS_GRAPHIC_SURFACE_IMAGE_SHAPE_BRESENHAM_LINE_HPP 
+#endif /// _XOS_GRAPHIC_IMAGE_SHAPE_ITEM_HPP 

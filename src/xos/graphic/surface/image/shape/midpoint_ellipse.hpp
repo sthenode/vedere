@@ -21,7 +21,7 @@
 #ifndef _XOS_GRAPHIC_SURFACE_IMAGE_SHAPE_MIDPOINT_ELLIPSE_HPP
 #define _XOS_GRAPHIC_SURFACE_IMAGE_SHAPE_MIDPOINT_ELLIPSE_HPP
 
-#include "xos/graphic/surface/image/shape/base.hpp"
+#include "xos/graphic/surface/image/shape/extend.hpp"
 #include "xos/graphic/surface/image/midpoint_ellipse.hpp"
 #include "xos/graphic/surface/image/hollow_midpoint_ellipse.hpp"
 
@@ -32,7 +32,7 @@ namespace image {
 namespace shape {
 
 typedef image::midpoint_ellipset
-<shape::base, image::interface> midpoint_ellipse_extends;
+<shape::extend, image::interface> midpoint_ellipse_extends;
 ///////////////////////////////////////////////////////////////////////
 ///  Class: midpoint_ellipse
 ///////////////////////////////////////////////////////////////////////

@@ -13,53 +13,71 @@
 /// or otherwise) arising in any way out of the use of this software, 
 /// even if advised of the possibility of such damage.
 ///
-///   File: bresenham_line.hpp
+///   File: interface.hpp
 ///
 /// Author: $author$
-///   Date: 6/20/2018
+///   Date: 6/23/2018
 ///////////////////////////////////////////////////////////////////////
-#ifndef _XOS_GRAPHIC_SURFACE_IMAGE_SHAPE_BRESENHAM_LINE_HPP
-#define _XOS_GRAPHIC_SURFACE_IMAGE_SHAPE_BRESENHAM_LINE_HPP
+#ifndef _XOS_GRAPHIC_IMAGE_SHAPE_INTERFACE_HPP
+#define _XOS_GRAPHIC_IMAGE_SHAPE_INTERFACE_HPP
 
-#include "xos/graphic/surface/image/shape/extend.hpp"
-#include "xos/graphic/surface/image/bresenham_line.hpp"
+#include "xos/graphic/image/interface.hpp"
 
 namespace xos {
 namespace graphic {
-namespace surface {
 namespace image {
 namespace shape {
 
-typedef image::bresenham_linet
-<shape::extend, image::interface> bresenham_line_extends;
 ///////////////////////////////////////////////////////////////////////
-///  Class: bresenham_line
+///  Class: interfacet
 ///////////////////////////////////////////////////////////////////////
-class _EXPORT_CLASS bresenham_line: public bresenham_line_extends {
+template <class TImplements = image::interface>
+
+class _EXPORT_CLASS interfacet: virtual public TImplements {
 public:
-    typedef bresenham_line_extends extends;
+    typedef TImplements implements;
 
-    bresenham_line(tImageInterface& image): extends(image) {
+    typedef implements tImageInterface;
+
+    virtual tImageInterface* select_as_image() {
+        tImageInterface* prevImage = 0;
+        return prevImage;
     }
-    virtual ~bresenham_line() {
+    virtual tImageInterface* set_as_image() {
+        tImageInterface* prevImage = 0;
+        return prevImage;
     }
 
-    virtual void draw_line
-    (tImageInterface &image, tInt x1,tInt y1, tInt x2,tInt y2) {
-        bresenham_line_drawt<extends, tPixel, tInt>(*this, image, x1,y1, x2,y2);
+    virtual tImageInterface* set_image(tImageInterface* image) {
+        tImageInterface* prevImage = this->image();
+        return prevImage;
     }
-    virtual void draw_triangle
-    (tImageInterface &image, tInt x1,tInt y1, tInt x2,tInt y2, tInt x3,tInt y3) {
-        bresenham_line_drawt<extends, tPixel, tInt>(*this, image, x1,y1, x2,y2);
-        bresenham_line_drawt<extends, tPixel, tInt>(*this, image, x2,y2, x3,y3);
-        bresenham_line_drawt<extends, tPixel, tInt>(*this, image, x3,y3, x1,y1);
+    virtual tImageInterface* image() const {
+        tImageInterface* image = 0;
+        return image;
+    }
+
+    virtual eError set_size(tSize width, tSize height) {
+        eError error = e_ERROR_NONE;
+        return error;
+    }
+    virtual eError on_set_size(tSize width, tSize height) {
+        eError error = e_ERROR_NONE;
+        return error;
+    }
+
+    virtual tSize width() const {
+        return 0;
+    }
+    virtual tSize height() const {
+        return 0;
     }
 };
+typedef interfacet<> interface;
 
 } /// namespace shape
 } /// namespace image
-} /// namespace surface
 } /// namespace graphic
 } /// namespace xos
 
-#endif /// _XOS_GRAPHIC_SURFACE_IMAGE_SHAPE_BRESENHAM_LINE_HPP 
+#endif /// _XOS_GRAPHIC_IMAGE_SHAPE_INTERFACE_HPP 
