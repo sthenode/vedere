@@ -31,6 +31,7 @@ typedef int tInt;
 typedef size_t tSize;
 typedef ssize_t tLength;
 typedef ssize_t tOffset;
+enum { vRGBAxisSize = 256 };
 
 typedef int eError;
 enum {
