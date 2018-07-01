@@ -48,7 +48,7 @@ public:
     (tImageInterface& image,
      tSize width = 0, tSize height = 0,
      tImageInterface* selected_image = 0)
-     : image_(image), selected_image_(selected_image),
+     : item_(*this), image_(image), selected_image_(selected_image),
        m_width(width), m_height(height) {
     }
     virtual ~extendt() {

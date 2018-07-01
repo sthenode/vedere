@@ -21,7 +21,7 @@
 #ifndef _XOS_GRAPHIC_IMAGE_SURFACE_CONTEXT_INTERFACE_HPP
 #define _XOS_GRAPHIC_IMAGE_SURFACE_CONTEXT_INTERFACE_HPP
 
-#include "xos/base/base.hpp"
+#include "xos/graphic/image/surface/pixel/interface.hpp"
 
 namespace xos {
 namespace graphic {
@@ -29,6 +29,59 @@ namespace image {
 namespace surface {
 namespace context {
 
+///////////////////////////////////////////////////////////////////////
+///  Class: interfacet
+///////////////////////////////////////////////////////////////////////
+template
+<class TPixelInterface = pixel::interface,
+ class TImplements = implement_base>
+
+class _EXPORT_CLASS interfacet: virtual public TImplements {
+public:
+    typedef TImplements implements;
+
+    typedef TPixelInterface tPixelInterface;
+
+    virtual eError fill_rectangle
+    (tOffset x, tOffset y, tSize width, tSize height) {
+        eError error = e_ERROR_NONE;
+        return error;
+    }
+    virtual eError fill_rectangle
+    (tOffset x, tOffset y, tSize width, tSize height, const tPixelInterface& color) {
+        eError error = e_ERROR_NONE;
+        return error;
+    }
+
+    virtual eError set_foreground
+    (tPixelInterface& oldColor, const tPixelInterface& toColor) {
+        eError error = e_ERROR_NONE;
+        return error;
+    }
+    virtual eError set_foreground(const tPixelInterface& toColor) {
+        eError error = e_ERROR_NONE;
+        return error;
+    }
+    virtual const tPixelInterface* foreground() const {
+        const tPixelInterface* color = 0;
+        return color;
+    }
+
+    virtual eError set_background
+    (tPixelInterface& oldColor, const tPixelInterface& toColor) {
+        eError error = e_ERROR_NONE;
+        return error;
+    }
+    virtual eError set_background(const tPixelInterface& toColor) {
+        eError error = e_ERROR_NONE;
+        return error;
+    }
+    virtual const tPixelInterface* background() const {
+        const tPixelInterface* color = 0;
+        return color;
+    }
+};
+typedef interfacet<> interface;
 
 } /// namespace context
 } /// namespace surface

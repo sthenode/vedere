@@ -13,48 +13,23 @@
 /// or otherwise) arising in any way out of the use of this software, 
 /// even if advised of the possibility of such damage.
 ///
-///   File: extend.hpp
+///   File: filled_ellipse.cpp
 ///
 /// Author: $author$
-///   Date: 6/27/2018
+///   Date: 6/30/2018
 ///////////////////////////////////////////////////////////////////////
-#ifndef _XOS_GRAPHIC_IMAGE_SURFACE_CONTEXT_EXTEND_HPP
-#define _XOS_GRAPHIC_IMAGE_SURFACE_CONTEXT_EXTEND_HPP
-
-#include "xos/graphic/image/surface/context/interface.hpp"
-#include "xos/graphic/image/surface/pixel/extend.hpp"
+#include "xos/graphic/image/surface/shape/filled_ellipse.hpp"
 
 namespace xos {
 namespace graphic {
 namespace image {
 namespace surface {
-namespace context {
+namespace shape {
 
-///////////////////////////////////////////////////////////////////////
-///  Class: extendt
-///////////////////////////////////////////////////////////////////////
-template
-<class TPixelInterface = pixel::interface,
- class TImplements = interface, class TExtends = xos::base>
 
-class _EXPORT_CLASS extendt: virtual public TImplements, public TExtends {
-public:
-    typedef TImplements implements;
-    typedef TExtends extends;
-
-    typedef TPixelInterface tPixelInterface;
-
-    extendt() {
-    }
-    virtual ~extendt() {
-    }
-};
-typedef extendt<> extend;
-
-} /// namespace context
+} /// namespace shape
 } /// namespace surface
 } /// namespace image
 } /// namespace graphic
 } /// namespace xos
 
-#endif /// _XOS_GRAPHIC_IMAGE_SURFACE_CONTEXT_EXTEND_HPP 

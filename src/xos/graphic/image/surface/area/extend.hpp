@@ -16,45 +16,56 @@
 ///   File: extend.hpp
 ///
 /// Author: $author$
-///   Date: 6/27/2018
+///   Date: 6/29/2018
 ///////////////////////////////////////////////////////////////////////
-#ifndef _XOS_GRAPHIC_IMAGE_SURFACE_CONTEXT_EXTEND_HPP
-#define _XOS_GRAPHIC_IMAGE_SURFACE_CONTEXT_EXTEND_HPP
+#ifndef _XOS_GRAPHIC_IMAGE_SURFACE_AREA_EXTEND_HPP
+#define _XOS_GRAPHIC_IMAGE_SURFACE_AREA_EXTEND_HPP
 
-#include "xos/graphic/image/surface/context/interface.hpp"
-#include "xos/graphic/image/surface/pixel/extend.hpp"
+#include "xos/graphic/image/surface/area/interface.hpp"
+#include "xos/graphic/image/extend.hpp"
 
 namespace xos {
 namespace graphic {
 namespace image {
 namespace surface {
-namespace context {
+namespace area {
 
 ///////////////////////////////////////////////////////////////////////
 ///  Class: extendt
 ///////////////////////////////////////////////////////////////////////
 template
-<class TPixelInterface = pixel::interface,
- class TImplements = interface, class TExtends = xos::base>
+<class TContextInterface = context::interface,
+ class TImplements = interface, class TExtends = image::extend>
 
 class _EXPORT_CLASS extendt: virtual public TImplements, public TExtends {
 public:
     typedef TImplements implements;
     typedef TExtends extends;
 
-    typedef TPixelInterface tPixelInterface;
+    typedef TContextInterface tContextInterface;
+    typedef implements tImageInterface;
 
-    extendt() {
+    extendt(tContextInterface& context, tImageInterface* image)
+    : extends(image), context_(context) {
+    }
+    extendt(tContextInterface& context): context_(context) {
     }
     virtual ~extendt() {
     }
+
+    virtual tContextInterface& context_interface() const {
+        return (tContextInterface&)context_;
+    }
+
+protected:
+    tContextInterface& context_;
 };
 typedef extendt<> extend;
 
-} /// namespace context
+} /// namespace area
 } /// namespace surface
 } /// namespace image
 } /// namespace graphic
 } /// namespace xos
 
-#endif /// _XOS_GRAPHIC_IMAGE_SURFACE_CONTEXT_EXTEND_HPP 
+#endif /// _XOS_GRAPHIC_IMAGE_SURFACE_AREA_EXTEND_HPP 

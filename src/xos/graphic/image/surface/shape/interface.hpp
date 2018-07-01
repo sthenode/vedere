@@ -13,48 +13,37 @@
 /// or otherwise) arising in any way out of the use of this software, 
 /// even if advised of the possibility of such damage.
 ///
-///   File: extend.hpp
+///   File: interface.hpp
 ///
 /// Author: $author$
-///   Date: 6/27/2018
+///   Date: 6/28/2018
 ///////////////////////////////////////////////////////////////////////
-#ifndef _XOS_GRAPHIC_IMAGE_SURFACE_CONTEXT_EXTEND_HPP
-#define _XOS_GRAPHIC_IMAGE_SURFACE_CONTEXT_EXTEND_HPP
+#ifndef _XOS_GRAPHIC_IMAGE_SURFACE_SHAPE_INTERFACE_HPP
+#define _XOS_GRAPHIC_IMAGE_SURFACE_SHAPE_INTERFACE_HPP
 
-#include "xos/graphic/image/surface/context/interface.hpp"
-#include "xos/graphic/image/surface/pixel/extend.hpp"
+#include "xos/graphic/image/shape/interface.hpp"
 
 namespace xos {
 namespace graphic {
 namespace image {
 namespace surface {
-namespace context {
+namespace shape {
 
 ///////////////////////////////////////////////////////////////////////
-///  Class: extendt
+///  Class: interfacet
 ///////////////////////////////////////////////////////////////////////
-template
-<class TPixelInterface = pixel::interface,
- class TImplements = interface, class TExtends = xos::base>
+template <class TImplements = image::shape::interface>
 
-class _EXPORT_CLASS extendt: virtual public TImplements, public TExtends {
+class _EXPORT_CLASS interfacet: virtual public TImplements {
 public:
     typedef TImplements implements;
-    typedef TExtends extends;
-
-    typedef TPixelInterface tPixelInterface;
-
-    extendt() {
-    }
-    virtual ~extendt() {
-    }
 };
-typedef extendt<> extend;
+typedef interfacet<> interface;
 
-} /// namespace context
+} /// namespace shape
 } /// namespace surface
 } /// namespace image
 } /// namespace graphic
 } /// namespace xos
 
-#endif /// _XOS_GRAPHIC_IMAGE_SURFACE_CONTEXT_EXTEND_HPP 
+#endif /// _XOS_GRAPHIC_IMAGE_SURFACE_SHAPE_INTERFACE_HPP 

@@ -13,48 +13,56 @@
 /// or otherwise) arising in any way out of the use of this software, 
 /// even if advised of the possibility of such damage.
 ///
-///   File: extend.hpp
+///   File: shape.hpp
 ///
 /// Author: $author$
-///   Date: 6/27/2018
+///   Date: 6/29/2018
 ///////////////////////////////////////////////////////////////////////
-#ifndef _XOS_GRAPHIC_IMAGE_SURFACE_CONTEXT_EXTEND_HPP
-#define _XOS_GRAPHIC_IMAGE_SURFACE_CONTEXT_EXTEND_HPP
+#ifndef _XOS_GRAPHIC_IMAGE_SURFACE_QT_SHAPE_HPP
+#define _XOS_GRAPHIC_IMAGE_SURFACE_QT_SHAPE_HPP
 
-#include "xos/graphic/image/surface/context/interface.hpp"
-#include "xos/graphic/image/surface/pixel/extend.hpp"
+#include "xos/graphic/image/surface/qt/area.hpp"
+#include "xos/graphic/image/surface/shape/extend.hpp"
 
 namespace xos {
 namespace graphic {
 namespace image {
 namespace surface {
-namespace context {
+namespace qt {
 
 ///////////////////////////////////////////////////////////////////////
-///  Class: extendt
+///  Class: shapet
 ///////////////////////////////////////////////////////////////////////
 template
-<class TPixelInterface = pixel::interface,
- class TImplements = interface, class TExtends = xos::base>
+<class TQImageInterface = area_interface,
+ class TImplements = shape::interface, class TExtends = shape::extend>
 
-class _EXPORT_CLASS extendt: virtual public TImplements, public TExtends {
+class _EXPORT_CLASS shapet: virtual public TImplements, public TExtends {
 public:
     typedef TImplements implements;
     typedef TExtends extends;
 
-    typedef TPixelInterface tPixelInterface;
+    typedef TQImageInterface tQImageInterface;
 
-    extendt() {
+    shapet(tQImageInterface& image)
+    : extends(image), image_(image) {
     }
-    virtual ~extendt() {
+    virtual ~shapet() {
     }
+
+    virtual tQImageInterface& surfaceQImage() const {
+        return (tQImageInterface&)image_;
+    }
+
+protected:
+    tQImageInterface& image_;
 };
-typedef extendt<> extend;
+typedef shapet<> shape;
 
-} /// namespace context
+} /// namespace qt
 } /// namespace surface
 } /// namespace image
 } /// namespace graphic
 } /// namespace xos
 
-#endif /// _XOS_GRAPHIC_IMAGE_SURFACE_CONTEXT_EXTEND_HPP 
+#endif /// _XOS_GRAPHIC_IMAGE_SURFACE_QT_SHAPE_HPP 
