@@ -142,6 +142,28 @@ rete_LIBS += \
 -l$${RETE_NAME} \
 
 ########################################################################
+# forma
+FORMA_THIRDPARTY_PKG_MAKE_BLD = $${FORMA_THIRDPARTY_PKG}/build/$${VEDERE_OS}/$${BUILD_CONFIG}
+FORMA_THIRDPARTY_PRJ_MAKE_BLD = $${FORMA_THIRDPARTY_PRJ}/build/$${VEDERE_OS}/$${BUILD_CONFIG}
+FORMA_THIRDPARTY_PKG_BLD = $${FORMA_THIRDPARTY_PKG}/build/$${VEDERE_OS}/QtCreator/$${BUILD_CONFIG}
+FORMA_THIRDPARTY_PRJ_BLD = $${FORMA_THIRDPARTY_PRJ}/build/$${VEDERE_OS}/QtCreator/$${BUILD_CONFIG}
+FORMA_PKG_BLD = $${OTHER_BLD}/$${FORMA_PKG}/build/$${VEDERE_OS}/QtCreator/$${BUILD_CONFIG}
+FORMA_PRJ_BLD = $${OTHER_BLD}/$${FORMA_PRJ}/build/$${VEDERE_OS}/QtCreator/$${BUILD_CONFIG}
+#FORMA_LIB = $${FORMA_THIRDPARTY_PKG_MAKE_BLD}/lib
+#FORMA_LIB = $${FORMA_THIRDPARTY_PRJ_MAKE_BLD}/lib
+#FORMA_LIB = $${FORMA_THIRDPARTY_PKG_BLD}/lib
+#FORMA_LIB = $${FORMA_THIRDPARTY_PRJ_BLD}/lib
+#FORMA_LIB = $${FORMA_PKG_BLD}/lib
+FORMA_LIB = $${FORMA_PRJ_BLD}/lib
+#FORMA_LIB = $${VEDERE_LIB}
+
+# forma LIBS
+#
+forma_LIBS += \
+-L$${FORMA_LIB}/lib$${FORMA_NAME} \
+-l$${FORMA_NAME} \
+
+########################################################################
 # lamna
 LAMNA_THIRDPARTY_PKG_MAKE_BLD = $${LAMNA_THIRDPARTY_PKG}/build/$${VEDERE_OS}/$${BUILD_CONFIG}
 LAMNA_THIRDPARTY_PRJ_MAKE_BLD = $${LAMNA_THIRDPARTY_PRJ}/build/$${VEDERE_OS}/$${BUILD_CONFIG}
@@ -186,6 +208,28 @@ plena_LIBS += \
 -l$${PLENA_NAME} \
 
 ########################################################################
+# qtere
+QTERE_THIRDPARTY_PKG_MAKE_BLD = $${QTERE_THIRDPARTY_PKG}/build/$${VEDERE_OS}/$${BUILD_CONFIG}
+QTERE_THIRDPARTY_PRJ_MAKE_BLD = $${QTERE_THIRDPARTY_PRJ}/build/$${VEDERE_OS}/$${BUILD_CONFIG}
+QTERE_THIRDPARTY_PKG_BLD = $${QTERE_THIRDPARTY_PKG}/build/$${VEDERE_OS}/QtCreator/$${BUILD_CONFIG}
+QTERE_THIRDPARTY_PRJ_BLD = $${QTERE_THIRDPARTY_PRJ}/build/$${VEDERE_OS}/QtCreator/$${BUILD_CONFIG}
+QTERE_PKG_BLD = $${OTHER_BLD}/$${QTERE_PKG}/build/$${VEDERE_OS}/QtCreator/$${BUILD_CONFIG}
+QTERE_PRJ_BLD = $${OTHER_BLD}/$${QTERE_PRJ}/build/$${VEDERE_OS}/QtCreator/$${BUILD_CONFIG}
+#QTERE_LIB = $${QTERE_THIRDPARTY_PKG_MAKE_BLD}/lib
+#QTERE_LIB = $${QTERE_THIRDPARTY_PRJ_MAKE_BLD}/lib
+#QTERE_LIB = $${QTERE_THIRDPARTY_PKG_BLD}/lib
+#QTERE_LIB = $${QTERE_THIRDPARTY_PRJ_BLD}/lib
+#QTERE_LIB = $${QTERE_PKG_BLD}/lib
+QTERE_LIB = $${QTERE_PRJ_BLD}/lib
+#QTERE_LIB = $${VEDERE_LIB}
+
+# qtere LIBS
+#
+qtere_LIBS += \
+-L$${QTERE_LIB}/lib$${QTERE_NAME} \
+-l$${QTERE_NAME} \
+
+########################################################################
 # vedere
 
 # vedere INCLUDEPATH
@@ -201,6 +245,7 @@ vedere_DEFINES += \
 vedere_LIBS += \
 $${plena_LIBS} \
 $${lamna_LIBS} \
+$${forma_LIBS} \
 $${rete_LIBS} \
 $${fila_LIBS} \
 $${crono_LIBS} \
