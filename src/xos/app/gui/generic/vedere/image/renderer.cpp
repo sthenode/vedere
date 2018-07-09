@@ -13,42 +13,25 @@
 /// or otherwise) arising in any way out of the use of this software, 
 /// even if advised of the possibility of such damage.
 ///
-///   File: image_format.hpp
+///   File: renderer.cpp
 ///
 /// Author: $author$
-///   Date: 7/6/2018
+///   Date: 7/8/2018
 ///////////////////////////////////////////////////////////////////////
-#ifndef _XOS_APP_GUI_VEDERE_IMAGE_FORMAT_HPP
-#define _XOS_APP_GUI_VEDERE_IMAGE_FORMAT_HPP
-
-#include "xos/graphic/image/format/pixel/bytes/reader.hpp"
+#include "xos/app/gui/generic/vedere/image/renderer.hpp"
 
 namespace xos {
 namespace app {
 namespace gui {
+namespace generic {
 namespace vedere {
 namespace image {
 
-enum format_t {
-    format_none,
-    format_raw,
-    format_dng,
-    format_png,
-    format_jpeg,
-    format_tiff,
-    format_gif,
-    format_bmp,
-
-    next_format,
-    first_format = format_raw,
-    last_format = (next_format - 1),
-    formats = (last_format - first_format + 1)
-};
 
 } /// namespace image
 } /// namespace vedere
+} /// namespace generic
 } /// namespace gui
 } /// namespace app
 } /// namespace xos
 
-#endif /// _XOS_APP_GUI_VEDERE_IMAGE_FORMAT_HPP 

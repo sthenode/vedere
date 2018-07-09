@@ -13,42 +13,32 @@
 /// or otherwise) arising in any way out of the use of this software, 
 /// even if advised of the possibility of such damage.
 ///
-///   File: image_format.hpp
+///   File: context.hpp
 ///
 /// Author: $author$
-///   Date: 7/6/2018
+///   Date: 7/8/2018
 ///////////////////////////////////////////////////////////////////////
-#ifndef _XOS_APP_GUI_VEDERE_IMAGE_FORMAT_HPP
-#define _XOS_APP_GUI_VEDERE_IMAGE_FORMAT_HPP
+#ifndef _XOS_GUI_GENERIC_IMAGE_CONTEXT_HPP
+#define _XOS_GUI_GENERIC_IMAGE_CONTEXT_HPP
 
-#include "xos/graphic/image/format/pixel/bytes/reader.hpp"
+#include "xos/gui/generic/image/format.hpp"
+#include "xos/gui/generic/image/surface.hpp"
 
 namespace xos {
-namespace app {
 namespace gui {
-namespace vedere {
+namespace generic {
 namespace image {
 
-enum format_t {
-    format_none,
-    format_raw,
-    format_dng,
-    format_png,
-    format_jpeg,
-    format_tiff,
-    format_gif,
-    format_bmp,
+typedef pointer_t context_t;
 
-    next_format,
-    first_format = format_raw,
-    last_format = (next_format - 1),
-    formats = (last_format - first_format + 1)
-};
+inline surface_t context_surface_create
+(context_t& context, format_t format, size_t with, size_t height) {
+    return 0;
+}
 
 } /// namespace image
-} /// namespace vedere
+} /// namespace generic
 } /// namespace gui
-} /// namespace app
 } /// namespace xos
 
-#endif /// _XOS_APP_GUI_VEDERE_IMAGE_FORMAT_HPP 
+#endif /// _XOS_GUI_GENERIC_IMAGE_CONTEXT_HPP 

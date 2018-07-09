@@ -22,7 +22,7 @@
 #define _XOS_APP_GUI_VEDERE_MAIN_WINDOW_HPP
 
 #include "xos/app/gui/vedere/image/format.hpp"
-#include "xos/graphic/image/format/png/libpng/reader.hpp"
+#include "xos/graphic/image/format/png/libpng/pixel/bgra_reader.hpp"
 
 namespace xos {
 namespace app {
@@ -46,7 +46,7 @@ public:
         return false;
     }
     virtual bool load_png_image(io::byte_reader& in) {
-        graphic::image::format::png::libpng::reader reader(in);
+        graphic::image::format::png::libpng::pixel::bgra_reader reader(in);
         if ((reader.read())) {
             if ((this->load_image(reader))) {
                 return true;

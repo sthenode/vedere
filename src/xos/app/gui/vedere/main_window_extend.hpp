@@ -109,13 +109,33 @@ public:
         return false;
     }
 
+    virtual bool load_image(graphic::image::format::pixel::bytes::reader& in) {
+        size_t image_width = 0, image_height = 0, image_depth = 0, image_size = 0;
+        byte_t* bytes = 0;
+
+        if ((bytes = in.detach_image(image_width, image_height, image_depth, image_size))) {
+            
+            LOG_DEBUG("set_image(bytes, image_size = " << image_size << ", image_width = " << image_width << ", image_height = " << image_height << ")...");
+            if ((set_image(bytes, image_size, image_width, image_height))) {
+                return true;
+            } else {
+                LOG_DEBUG("failed on set_image(bytes, image_size = " << image_size << ", image_width = " << image_width << ", image_height = " << image_height << ")");
+
+                LOG_DEBUG("delete[] bytes...");
+                delete[] bytes;
+                LOG_DEBUG("...delete[] bytes");
+            }
+        }
+        return false;
+    }
+
     virtual void* load_image
     (io::byte_reader& in, size_t size, size_t width, size_t height) {
-        return false;
+        return 0;
     }
     virtual void* set_image
     (byte_t* bytes, size_t size, size_t width, size_t height) {
-        return false;
+        return 0;
     }
 };
 

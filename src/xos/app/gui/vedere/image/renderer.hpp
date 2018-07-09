@@ -37,7 +37,7 @@ namespace vedere {
 namespace image {
 
 ///////////////////////////////////////////////////////////////////////
-///  Class: image_renderert
+///  Class: renderert
 ///////////////////////////////////////////////////////////////////////
 template
 <typename TImageFormat, TImageFormat VImageFormatNone,
@@ -45,7 +45,7 @@ template
  typename TTransformationMode, TTransformationMode VTransformationModeNone,
  class TImplements = implement_base>
 
-class _EXPORT_CLASS image_renderert: virtual public TImplements {
+class _EXPORT_CLASS renderert: virtual public TImplements {
 public:
     typedef TImplements Implements;
 
@@ -186,6 +186,65 @@ public:
     virtual size_t in_ratio_to() const {
         return XOS_APP_GUI_VEDERE_IMAGE_RENDERER_IN_RATIO_TO;
     }
+};
+
+///////////////////////////////////////////////////////////////////////
+///  Class: renderer_extendt
+///////////////////////////////////////////////////////////////////////
+template <class TImplements, class TExtends = base>
+class _EXPORT_CLASS renderer_extendt: virtual public TImplements, public TExtends {
+public:
+    typedef TImplements implements;
+    typedef TExtends extends;
+
+    renderer_extendt()
+    : width_(0), height_(0),
+      in_min_width_(XOS_APP_GUI_VEDERE_IMAGE_RENDERER_IN_MIN_WIDTH),
+      in_min_height_(XOS_APP_GUI_VEDERE_IMAGE_RENDERER_IN_MIN_HEIGHT),
+      in_offset_x_(XOS_APP_GUI_VEDERE_IMAGE_RENDERER_IN_OFFSET_X),
+      in_offset_y_(XOS_APP_GUI_VEDERE_IMAGE_RENDERER_IN_OFFSET_Y),
+      in_ratio_(XOS_APP_GUI_VEDERE_IMAGE_RENDERER_IN_RATIO),
+      in_ratio_to_(XOS_APP_GUI_VEDERE_IMAGE_RENDERER_IN_RATIO_TO) {
+    }
+    virtual ~renderer_extendt() {
+    }
+
+    virtual bool resize(size_t width, size_t height) {
+        width_ = width;
+        height_ = height;
+        return true;
+    }
+
+    virtual size_t width() const {
+        return width_;
+    }
+    virtual size_t height() const {
+        return height_;
+    }
+    virtual size_t in_min_width() const {
+        return in_min_width_;
+    }
+    virtual size_t in_min_height() const {
+        return in_min_height_;
+    }
+    virtual size_t in_offset_x() const {
+        return in_offset_x_;
+    }
+    virtual size_t in_offset_y() const {
+        return in_offset_y_;
+    }
+    virtual size_t in_ratio() const {
+        return in_ratio_;
+    }
+    virtual size_t in_ratio_to() const {
+        return in_ratio_to_;
+    }
+
+protected:
+    size_t width_, height_,
+           in_min_width_, in_min_height_,
+           in_offset_x_, in_offset_y_,
+           in_ratio_, in_ratio_to_;
 };
 
 } /// namespace image
