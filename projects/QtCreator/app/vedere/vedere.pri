@@ -58,6 +58,9 @@ $${NADIR_SRC}/xos/console/getopt/main_opt.hpp \
 $${NADIR_SRC}/xos/console/getopt/main.hpp \
 $${FILA_SRC}/xos/console/main_main.hpp \
 $${LAMNA_SRC}/xos/graphic/image/surface/rectangle.hpp \
+$${VEDERE_SRC}/xos/gui/generic/main.hpp \
+$${VEDERE_SRC}/xos/gui/generic/main_window.hpp \
+$${VEDERE_SRC}/xos/gui/generic/window_main.hpp \
 $${VEDERE_SRC}/xos/gui/generic/image/format.hpp \
 $${VEDERE_SRC}/xos/gui/generic/image/aspect.hpp \
 $${VEDERE_SRC}/xos/gui/generic/image/transform.hpp \
@@ -69,20 +72,24 @@ $${VEDERE_SRC}/xos/app/gui/vedere/main_window_extend.hpp \
 $${VEDERE_SRC}/xos/app/gui/vedere/main_window.hpp \
 $${VEDERE_SRC}/xos/app/gui/vedere/main_opt.hpp \
 $${VEDERE_SRC}/xos/app/gui/vedere/main.hpp \
+$${VEDERE_SRC}/xos/app/gui/generic/vedere/image/renderer.hpp \
+$${VEDERE_SRC}/xos/app/gui/generic/vedere/main_window.hpp \
+$${VEDERE_SRC}/xos/app/gui/generic/vedere/main.hpp \
 
 # vedere_exe SOURCES
 #
 vedere_exe_SOURCES += \
 $${FILA_SRC}/xos/console/main_main.cpp \
 $${LAMNA_SRC}/xos/graphic/image/surface/rectangle.cpp \
-$${VEDERE_SRC}/xos/app/gui/generic/vedere/image/renderer.cpp \
 $${VEDERE_SRC}/xos/gui/generic/image/format.cpp \
 $${VEDERE_SRC}/xos/gui/generic/image/aspect.cpp \
 $${VEDERE_SRC}/xos/gui/generic/image/transform.cpp \
+$${VEDERE_SRC}/xos/gui/generic/window_main.cpp \
 $${VEDERE_SRC}/xos/app/gui/vedere/main_window_extend.cpp \
-$${VEDERE_SRC}/xos/app/gui/vedere/main_window.cpp \
 $${VEDERE_SRC}/xos/app/gui/vedere/main_opt.cpp \
-$${VEDERE_SRC}/xos/app/gui/vedere/main.cpp \
+$${VEDERE_SRC}/xos/app/gui/generic/vedere/image/renderer.cpp \
+$${VEDERE_SRC}/xos/app/gui/generic/vedere/main_window.cpp \
+$${VEDERE_SRC}/xos/app/gui/generic/vedere/main.cpp \
 
 ########################################################################
 # vedere_exe FRAMEWORKS
