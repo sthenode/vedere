@@ -13,48 +13,24 @@
 /// or otherwise) arising in any way out of the use of this software, 
 /// even if advised of the possibility of such damage.
 ///
-///   File: context.hpp
+///   File: main.cpp
 ///
 /// Author: $author$
-///   Date: 7/8/2018
+///   Date: 7/10/2018
 ///////////////////////////////////////////////////////////////////////
-#ifndef _XOS_GUI_GENERIC_IMAGE_CONTEXT_HPP
-#define _XOS_GUI_GENERIC_IMAGE_CONTEXT_HPP
-
-#include "xos/gui/generic/image/format.hpp"
-#include "xos/gui/generic/image/surface.hpp"
+#include "xos/app/gui/generic/vedere/main.hpp"
 
 namespace xos {
+namespace app {
 namespace gui {
 namespace generic {
-namespace image {
+namespace vedere {
 
-typedef pointer_t context_t;
+static main the_main;
 
-inline surface_t context_surface_create
-(context_t& context, format_t format, size_t with, size_t height) {
-    return 0;
-}
-inline size_t context_save(context_t& context) {
-    return 0;
-}
-inline size_t context_restore(context_t& context) {
-    return 0;
-}
-inline size_t context_translate(context_t& context, size_t x, size_t y) {
-    return 0;
-}
-inline size_t context_scale(context_t& context, double x, double y) {
-    return 0;
-}
-inline size_t context_paint_surface
-(context_t& context, surface_t& surface, size_t x, size_t y) {
-    return 0;
-}
-
-} /// namespace image
+} /// namespace vedere
 } /// namespace generic
 } /// namespace gui
+} /// namespace app
 } /// namespace xos
 
-#endif /// _XOS_GUI_GENERIC_IMAGE_CONTEXT_HPP 

@@ -53,13 +53,13 @@ public:
     typedef renderer_implements implements;
     typedef renderer_extends extends;
 
-    renderer(xos::gui::generic::image::context_t* context = 0): context_(context) {
+    renderer(xos::gui::generic::image::context_t context = 0): context_(context) {
     }
     virtual ~renderer() {
     }
     
     virtual bool init
-    (xos::gui::generic::image::context_t* context, size_t width, size_t height) {
+    (xos::gui::generic::image::context_t context, size_t width, size_t height) {
         context_ = context;
         width_ = width;
         height_ = height;
@@ -74,12 +74,63 @@ public:
     (const void* image, size_t image_width, size_t image_height,
      size_t width, size_t height, size_t x, size_t y, xos::gui::generic::image::format_t format,
      xos::gui::generic::image::aspect_t aspect, xos::gui::generic::image::transform_t transform) {
+        if ((context_) && (image)) {
+            xos::gui::generic::image::surface_t surface = 0;
+
+            if ((surface = image_create_from_data
+                 (context_, (const byte_t*)image, format, width, height))) {
+                xos::gui::generic::image::context_save(context_);
+                switch(aspect) {
+                case xos::gui::generic::image::ASPECT_IGNORE: {
+                    double scale_x = (((double)width)/((double)image_width)),
+                           scale_y = (((double)height)/((double)image_height));
+                    xos::gui::generic::image::context_translate(context_, x,y);
+                    xos::gui::generic::image::context_scale(context_, scale_x,scale_y);
+                    break; }
+                }
+                xos::gui::generic::image::context_paint_surface(context_, surface, 0,0);
+                xos::gui::generic::image::context_restore(context_);
+                xos::gui::generic::image::surface_destroy(surface);
+                return true;
+            }
+        }
         return false;
     }
 
-    virtual xos::gui::generic::image::surface_t* image_copy_data
-    (xos::gui::generic::image::surface_t* surface, unsigned char* surface_data,
-     const unsigned char* image, xos::gui::generic::image::format_t image_format,
+    virtual xos::gui::generic::image::surface_t image_create_from_data
+    (xos::gui::generic::image::context_t context, 
+     const byte_t* image, xos::gui::generic::image::format_t image_format, 
+     size_t image_width, size_t image_height) const {
+        if ((context) && (image) && (image_width) && (image_height)) {
+            xos::gui::generic::image::surface_t surface = 0;
+
+            if ((surface = xos::gui::generic::image::context_surface_create
+                 (context, image_format, image_width, image_height))) {
+                byte_t* surface_data = 0;
+
+                xos::gui::generic::image::surface_flush(surface);
+                if ((surface_data = xos::gui::generic::image::surface_get_data(surface))) {
+                    size_t surface_stride = xos::gui::generic::image::surface_get_stride(surface);
+
+                    if (0 < (surface_stride)) {
+                        xos::gui::generic::image::surface_mark_dirty(surface);
+                        if ((image_copy_data
+                             (surface, surface_data, image, image_format,
+                              image_width, image_height, surface_stride))) {
+                            xos::gui::generic::image::surface_flush(surface);
+                            return surface;
+                        }
+                    }
+                }
+                xos::gui::generic::image::surface_destroy(surface);
+            }
+        }
+        return 0;
+    }
+
+    virtual xos::gui::generic::image::surface_t image_copy_data
+    (xos::gui::generic::image::surface_t surface, unsigned char* surface_data,
+     const byte_t* image, xos::gui::generic::image::format_t image_format,
      size_t image_width, size_t image_height, size_t surface_stride) const {
         if (xos::gui::generic::image::FORMAT_ARGB32 == (image_format)) {
             return image_copy_data_argb32
@@ -90,9 +141,9 @@ public:
         }
         return 0;
     }
-    virtual xos::gui::generic::image::surface_t* image_copy_data_argb32
-    (xos::gui::generic::image::surface_t* surface, unsigned char* surface_data,
-     const unsigned char* image, size_t image_width, size_t image_height, size_t surface_stride) const {
+    virtual xos::gui::generic::image::surface_t image_copy_data_argb32
+    (xos::gui::generic::image::surface_t surface, unsigned char* surface_data,
+     const byte_t* image, size_t image_width, size_t image_height, size_t surface_stride) const {
         if ((surface) && (surface_data) && (surface_stride)
             && (image) && (image_width) && (image_height)) {
             size_t row_size = (image_width * sizeof(uint32_t));
@@ -108,7 +159,7 @@ public:
     }
 
 protected:
-    xos::gui::generic::image::context_t* context_;
+    xos::gui::generic::image::context_t context_;
 };
 
 } /// namespace image
