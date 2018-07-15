@@ -175,16 +175,87 @@ protected:
         return err;
     }
 
+    virtual int on_file_argument_image_format
+    (const char_t* arg, int argind,
+     int argc, char_t**argv, char_t**env) {
+        const char* to = 0;
+        if ((to) && (to[0])) {
+            if ((!chars_t::compare(to, XOS_APP_GUI_VEDERE_MAIN_IMAGE_FORMAT_DNG_OPTARG_S))) {
+                LOG_DEBUG("set_image_format(image::format_dng)...");
+                set_image_format(image::format_dng);
+            } else {
+                if ((!chars_t::compare(to, XOS_APP_GUI_VEDERE_MAIN_IMAGE_FORMAT_PNG_OPTARG_S))) {
+                    LOG_DEBUG("set_image_format(image::format_png)...");
+                    set_image_format(image::format_png);
+                } else {
+                    if ((!chars_t::compare(to, XOS_APP_GUI_VEDERE_MAIN_IMAGE_FORMAT_JPEG_OPTARG_S))) {
+                        LOG_DEBUG("set_image_format(image::format_jpeg)...");
+                        set_image_format(image::format_jpeg);
+                    } else {
+                        if ((!chars_t::compare(to, XOS_APP_GUI_VEDERE_MAIN_IMAGE_FORMAT_TIFF_OPTARG_S))) {
+                            LOG_DEBUG("set_image_format(image::format_tiff)...");
+                            set_image_format(image::format_tiff);
+                        } else {
+                            if ((!chars_t::compare(to, XOS_APP_GUI_VEDERE_MAIN_IMAGE_FORMAT_GIF_OPTARG_S))) {
+                                LOG_DEBUG("set_image_format(image::format_gif)...");
+                                set_image_format(image::format_gif);
+                            } else {
+                                if ((!chars_t::compare(to, XOS_APP_GUI_VEDERE_MAIN_IMAGE_FORMAT_BMP_OPTARG_S))) {
+                                    LOG_DEBUG("set_image_format(image::format_bmp)...");
+                                    set_image_format(image::format_bmp);
+                                } else {
+                                    if ((!chars_t::compare(to, XOS_APP_GUI_VEDERE_MAIN_IMAGE_FORMAT_RAW_OPTARG_S))) {
+                                        LOG_DEBUG("set_image_format(image::format_raw)...");
+                                        set_image_format(image::format_raw);
+                                    } else {
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return 0;
+    }
     virtual int on_file_argument
     (const char_t* arg, int argind,
      int argc, char_t**argv, char_t**env) {
         int err = 0;
         const char_t* to = arg;
         if ((to) && (to[0])) {
+            image::format_t format = image_format();
             LOG_DEBUG("set image_file = \"" << to << "\"...");
             image_file_.assign(to);
+            if (image::format_none == (format)) {
+                err = on_file_argument_image_format(arg, argind, argc, argv, env);
+            }
         }
         return err;
+    }
+
+    virtual size_t set_image_width(size_t to) {
+        image_width_ = to;
+        return image_width_;
+    }
+    virtual size_t image_width() const {
+        return image_width_;
+    }
+
+    virtual size_t set_image_height(size_t to) {
+        image_height_ = to;
+        return image_height_;
+    }
+    virtual size_t image_height() const {
+        return image_height_;
+    }
+
+    virtual size_t set_image_depth(size_t to) {
+        image_depth_ = to;
+        return image_depth_;
+    }
+    virtual size_t image_depth() const {
+        return image_depth_;
     }
 
     virtual image::format_t set_image_format(image::format_t to) {
@@ -201,6 +272,21 @@ protected:
     }
     virtual image::transform_t image_transform() const {
         return image_transform_;
+    }
+
+    virtual const char_t* set_image_file(const char_t* to) {
+        image_file_.assign(to);
+        return image_file();
+    }
+    virtual const char_t* image_file() const {
+        return image_file_.chars();
+    }
+    
+    virtual size_t main_window_width() const {
+        return main_window_width_;
+    }
+    virtual size_t main_window_height() const {
+        return main_window_height_;
     }
 
 protected:

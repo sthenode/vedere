@@ -21,7 +21,7 @@
 #ifndef _XOS_GUI_GENERIC_MAIN_WINDOW_HPP
 #define _XOS_GUI_GENERIC_MAIN_WINDOW_HPP
 
-#include "xos/base/base.hpp"
+#include "xos/gui/generic/window.hpp"
 
 namespace xos {
 namespace gui {
@@ -30,17 +30,28 @@ namespace generic {
 ///////////////////////////////////////////////////////////////////////
 ///  Class: main_windowt
 ///////////////////////////////////////////////////////////////////////
-template <class TImplements = implement_base, class TExtends = base>
+template <class TImplements = window::implements, class TExtends = window>
 class _EXPORT_CLASS main_windowt: virtual public TImplements, public TExtends {
 public:
     typedef TImplements implements;
     typedef TExtends extends;
 
-    main_windowt(const main_windowt &copy) {
-    }
     main_windowt() {
     }
     virtual ~main_windowt() {
+    }
+private:
+    main_windowt(const main_windowt &copy) {
+    }
+
+public:
+    virtual int after_create(int argc, char** argv, char** env) {
+        int err = 0;
+        return err;
+    }
+    virtual int before_destroy(int argc, char** argv, char** env) {
+        int err = 0;
+        return err;
     }
 };
 typedef main_windowt<> main_window;

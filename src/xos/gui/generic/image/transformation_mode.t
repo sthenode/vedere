@@ -13,16 +13,25 @@
 /// or otherwise) arising in any way out of the use of this software, 
 /// even if advised of the possibility of such damage.
 ///
-///   File: main.cpp
+///   File: transform.hpp
 ///
 /// Author: $author$
-///   Date: 5/30/2018
+///   Date: 7/8/2018
 ///////////////////////////////////////////////////////////////////////
-#include "xos/gui/main.hpp"
+#ifndef _XOS_GUI_GENERIC_IMAGE_TRANSFORM_HPP
+#define _XOS_GUI_GENERIC_IMAGE_TRANSFORM_HPP
+
+#include "xos/base/base.hpp"
 
 namespace xos {
 namespace gui {
+namespace generic {
+namespace image {
 
+
+} /// namespace image
+} /// namespace generic
 } /// namespace gui
 } /// namespace xos
 
+#endif /// _XOS_GUI_GENERIC_IMAGE_TRANSFORM_HPP 

@@ -288,7 +288,7 @@ protected:
         }
         return err;
     }
-    virtual const char_t* arguments(const char_t**& argv) const {
+    virtual const char_t* arguments(const char_t**& argv) {
         static const char_t* _args = XOS_APP_GUI_VEDERE_MAIN_ARGS;
         static const char_t* _argv[] = {
             XOS_APP_GUI_VEDERE_MAIN_ARGV

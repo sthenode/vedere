@@ -70,6 +70,7 @@ public:
         return true;
     }
 
+    using extends::render;
     virtual bool render
     (const void* image, size_t image_width, size_t image_height,
      size_t width, size_t height, size_t x, size_t y, xos::gui::generic::image::format_t format,

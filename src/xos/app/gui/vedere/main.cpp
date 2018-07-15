@@ -25,8 +25,6 @@ namespace app {
 namespace gui {
 namespace vedere {
 
-static main the_main;
-
 } /// namespace vedere
 } /// namespace gui
 } /// namespace app

@@ -13,16 +13,21 @@
 /// or otherwise) arising in any way out of the use of this software, 
 /// even if advised of the possibility of such damage.
 ///
-///   File: main.cpp
+///   File: window.cpp
 ///
 /// Author: $author$
-///   Date: 5/30/2018
+///   Date: 7/12/2018
 ///////////////////////////////////////////////////////////////////////
-#include "xos/gui/main.hpp"
+#include "xos/app/gui/vedere/window.hpp"
 
 namespace xos {
+namespace app {
 namespace gui {
+namespace vedere {
 
+
+} /// namespace vedere
 } /// namespace gui
+} /// namespace app
 } /// namespace xos
 

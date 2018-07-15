@@ -54,6 +54,8 @@ public:
                 success = load_image(width, height, depth, in, format);
                 in.close();
             }
+        } else {
+            LOG_ERROR("...failed on ((file) && (file[0]))");
         }
         return success;
     }

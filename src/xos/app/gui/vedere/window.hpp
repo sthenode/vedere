@@ -13,17 +13,16 @@
 /// or otherwise) arising in any way out of the use of this software, 
 /// even if advised of the possibility of such damage.
 ///
-///   File: main_window.hpp
+///   File: window.hpp
 ///
 /// Author: $author$
-///   Date: 7/6/2018
+///   Date: 7/12/2018
 ///////////////////////////////////////////////////////////////////////
-#ifndef _XOS_APP_GUI_VEDERE_MAIN_WINDOW_HPP
-#define _XOS_APP_GUI_VEDERE_MAIN_WINDOW_HPP
+#ifndef _XOS_APP_GUI_VEDERE_WINDOW_HPP
+#define _XOS_APP_GUI_VEDERE_WINDOW_HPP
 
-#include "xos/app/gui/vedere/main_window_extend.hpp"
-#include "xos/app/gui/vedere/image/format.hpp"
-#include "xos/graphic/image/format/png/libpng/pixel/bgra_reader.hpp"
+#include "xos/mt/std/queue.hpp"
+#include "xos/app/gui/vedere/window_extend.hpp"
 
 namespace xos {
 namespace app {
@@ -31,42 +30,37 @@ namespace gui {
 namespace vedere {
 
 ///////////////////////////////////////////////////////////////////////
-///  Class: main_windowt
+///  Class: windowt
 ///////////////////////////////////////////////////////////////////////
 template <class TExtends>
-class _EXPORT_CLASS main_windowt: public TExtends {
+class _EXPORT_CLASS windowt: public TExtends {
 public:
     typedef TExtends extends;
 
-    main_windowt() {
+    typedef typename extends::message_type_t message_type_t;
+    typedef typename extends::message_data_t message_data_t;
+    typedef typename extends::message_t message_t;
+    typedef mt::std::queuet<message_t> message_queue_t;
+
+    windowt() {
     }
-    virtual ~main_windowt() {
+    virtual ~windowt() {
     }
 
-    virtual bool load_dng_image(io::byte_reader& in) {
-        return false;
-    }
-    virtual bool load_png_image(io::byte_reader& in) {
-        graphic::image::format::png::libpng::pixel::bgra_reader reader(in);
-        if ((reader.read())) {
-            if ((this->load_image(reader))) {
-                return true;
-            }
+    virtual bool post_message(message_type_t type, message_data_t data) {
+        message_t message(type, data);
+        LOG_DEBUG("message_queue_.enqueue(message_t message(type = " << type << ",...))...");
+        if ((message_queue_.enqueue(message))) {
+            LOG_DEBUG("...message_queue_.enqueue(message_t message(type = " << type << ",...))");
+            return true;
+        } else {
+            LOG_ERROR("...failed on message_queue_.enqueue(message_t message(type = " << type << ",...))");
         }
         return false;
     }
-    virtual bool load_jpeg_image(io::byte_reader& in) {
-        return false;
-    }
-    virtual bool load_tiff_image(io::byte_reader& in) {
-        return false;
-    }
-    virtual bool load_gif_image(io::byte_reader& in) {
-        return false;
-    }
-    virtual bool load_bmp_image(io::byte_reader& in) {
-        return false;
-    }
+
+protected:
+    message_queue_t message_queue_;
 };
 
 } /// namespace vedere
@@ -74,4 +68,4 @@ public:
 } /// namespace app
 } /// namespace xos
 
-#endif /// _XOS_APP_GUI_VEDERE_MAIN_WINDOW_HPP 
+#endif /// _XOS_APP_GUI_VEDERE_WINDOW_HPP 

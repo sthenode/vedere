@@ -13,16 +13,21 @@
 /// or otherwise) arising in any way out of the use of this software, 
 /// even if advised of the possibility of such damage.
 ///
-///   File: main.cpp
+///   File: transformation_mode.cpp
 ///
 /// Author: $author$
-///   Date: 5/30/2018
+///   Date: 7/8/2018
 ///////////////////////////////////////////////////////////////////////
-#include "xos/gui/main.hpp"
+#include "xos/gui/generic/image/transformation_mode.hpp"
 
 namespace xos {
 namespace gui {
+namespace generic {
+namespace image {
 
+
+} /// namespace image
+} /// namespace generic
 } /// namespace gui
 } /// namespace xos
 
