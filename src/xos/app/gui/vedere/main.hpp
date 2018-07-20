@@ -24,6 +24,7 @@
 #include "xos/app/gui/vedere/main_opt.hpp"
 #include "xos/app/gui/vedere/image/format.hpp"
 #include "xos/app/gui/vedere/image/transform.hpp"
+#include "xos/fs/path.hpp"
 
 #define XOS_APP_GUI_VEDERE_MAIN_WINDOW_WIDTH 500
 #define XOS_APP_GUI_VEDERE_MAIN_WINDOW_HEIGHT 250
@@ -178,7 +179,8 @@ protected:
     virtual int on_file_argument_image_format
     (const char_t* arg, int argind,
      int argc, char_t**argv, char_t**env) {
-        const char* to = 0;
+        fs::path path(arg);
+        const char* to = path.file_extension().chars();
         if ((to) && (to[0])) {
             if ((!chars_t::compare(to, XOS_APP_GUI_VEDERE_MAIN_IMAGE_FORMAT_DNG_OPTARG_S))) {
                 LOG_DEBUG("set_image_format(image::format_dng)...");
