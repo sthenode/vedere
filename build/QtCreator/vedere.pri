@@ -20,7 +20,55 @@
 #
 # build QtCreator .pri file for vedere
 ########################################################################
-HOME = ${HOME}
+HOME_UNAME = $$system(uname)
+
+contains(HOME_UNAME,Darwin) {
+HOME = /Users/jboyd
+} else {
+HOME = /home/jboyd
+}
+
+########################################################################
+# libjpeg
+#
+# pkg-config --cflags --libs libjpeg
+#
+
+# build libjpeg INCLUDEPATH
+#
+build_libjpeg_INCLUDEPATH += \
+$${HOME}/build/jpeg/include \
+
+# build libjpeg DEFINES
+#
+build_libjpeg_DEFINES += \
+
+# build libjpeg LIBS
+#
+build_libjpeg_LIBS += \
+-L$${HOME}/build/jpeg/lib \
+-ljpeg \
+
+########################################################################
+# libpng
+#
+# pkg-config --cflags --libs libpng
+#
+
+# build libpng INCLUDEPATH
+#
+build_libpng_INCLUDEPATH += \
+$${HOME}/build/libpng/include \
+
+# build libpng DEFINES
+#
+build_libpng_DEFINES += \
+
+# build libpng LIBS
+#
+build_libpng_LIBS += \
+-L${HOME}/build/libpng/lib \
+-lpng \
 
 ########################################################################
 # rostra
@@ -57,6 +105,42 @@ build_nadir_DEFINES += \
 # build nadir LIBS
 #
 build_nadir_LIBS += \
+
+########################################################################
+# arbora
+#
+# pkg-config --cflags --libs arbora
+#
+
+# build arbora INCLUDEPATH
+#
+build_arbora_INCLUDEPATH += \
+
+# build arbora DEFINES
+#
+build_arbora_DEFINES += \
+
+# build arbora LIBS
+#
+build_arbora_LIBS += \
+
+########################################################################
+# archa
+#
+# pkg-config --cflags --libs archa
+#
+
+# build archa INCLUDEPATH
+#
+build_archa_INCLUDEPATH += \
+
+# build archa DEFINES
+#
+build_archa_DEFINES += \
+
+# build archa LIBS
+#
+build_archa_LIBS += \
 
 ########################################################################
 # crono
@@ -199,8 +283,12 @@ $${build_forma_INCLUDEPATH} \
 $${build_rete_INCLUDEPATH} \
 $${build_fila_INCLUDEPATH} \
 $${build_crono_INCLUDEPATH} \
+$${build_archa_INCLUDEPATH} \
+$${build_arbora_INCLUDEPATH} \
 $${build_nadir_INCLUDEPATH} \
 $${build_rostra_INCLUDEPATH} \
+$${build_libpng_INCLUDEPATH} \
+$${build_libjpeg_INCLUDEPATH} \
 
 
 # build vedere DEFINES
@@ -208,12 +296,16 @@ $${build_rostra_INCLUDEPATH} \
 build_vedere_DEFINES += \
 $${build_rostra_DEFINES} \
 $${build_nadir_DEFINES} \
+$${build_arbora_DEFINES} \
+$${build_archa_DEFINES} \
 $${build_crono_DEFINES} \
 $${build_fila_DEFINES} \
 $${build_rete_DEFINES} \
 $${build_forma_DEFINES} \
 $${build_lamna_DEFINES} \
 $${build_plena_DEFINES} \
+$${build_libpng_DEFINES} \
+$${build_libjpeg_DEFINES} \
 
 
 # build vedere LIBS
@@ -225,7 +317,11 @@ $${build_forma_LIBS} \
 $${build_rete_LIBS} \
 $${build_fila_LIBS} \
 $${build_crono_LIBS} \
+$${build_archa_LIBS} \
+$${build_arbora_LIBS} \
 $${build_nadir_LIBS} \
 $${build_rostra_LIBS} \
+$${build_libpng_LIBS} \
+$${build_libjpeg_LIBS} \
 
 

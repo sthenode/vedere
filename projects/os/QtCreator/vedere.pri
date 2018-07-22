@@ -76,6 +76,50 @@ nadir_LIBS += \
 -l$${NADIR_NAME} \
 
 ########################################################################
+# arbora
+ARBORA_THIRDPARTY_PKG_MAKE_BLD = $${ARBORA_THIRDPARTY_PKG}/build/$${VEDERE_OS}/$${BUILD_CONFIG}
+ARBORA_THIRDPARTY_PRJ_MAKE_BLD = $${ARBORA_THIRDPARTY_PRJ}/build/$${VEDERE_OS}/$${BUILD_CONFIG}
+ARBORA_THIRDPARTY_PKG_BLD = $${ARBORA_THIRDPARTY_PKG}/build/$${VEDERE_OS}/QtCreator/$${BUILD_CONFIG}
+ARBORA_THIRDPARTY_PRJ_BLD = $${ARBORA_THIRDPARTY_PRJ}/build/$${VEDERE_OS}/QtCreator/$${BUILD_CONFIG}
+ARBORA_PKG_BLD = $${OTHER_BLD}/$${ARBORA_PKG}/build/$${VEDERE_OS}/QtCreator/$${BUILD_CONFIG}
+ARBORA_PRJ_BLD = $${OTHER_BLD}/$${ARBORA_PRJ}/build/$${VEDERE_OS}/QtCreator/$${BUILD_CONFIG}
+#ARBORA_LIB = $${ARBORA_THIRDPARTY_PKG_MAKE_BLD}/lib
+#ARBORA_LIB = $${ARBORA_THIRDPARTY_PRJ_MAKE_BLD}/lib
+#ARBORA_LIB = $${ARBORA_THIRDPARTY_PKG_BLD}/lib
+#ARBORA_LIB = $${ARBORA_THIRDPARTY_PRJ_BLD}/lib
+#ARBORA_LIB = $${ARBORA_PKG_BLD}/lib
+ARBORA_LIB = $${ARBORA_PRJ_BLD}/lib
+#ARBORA_LIB = $${VEDERE_LIB}
+
+# arbora LIBS
+#
+arbora_LIBS += \
+-L$${ARBORA_LIB}/lib$${ARBORA_NAME} \
+-l$${ARBORA_NAME} \
+
+########################################################################
+# archa
+ARCHA_THIRDPARTY_PKG_MAKE_BLD = $${ARCHA_THIRDPARTY_PKG}/build/$${VEDERE_OS}/$${BUILD_CONFIG}
+ARCHA_THIRDPARTY_PRJ_MAKE_BLD = $${ARCHA_THIRDPARTY_PRJ}/build/$${VEDERE_OS}/$${BUILD_CONFIG}
+ARCHA_THIRDPARTY_PKG_BLD = $${ARCHA_THIRDPARTY_PKG}/build/$${VEDERE_OS}/QtCreator/$${BUILD_CONFIG}
+ARCHA_THIRDPARTY_PRJ_BLD = $${ARCHA_THIRDPARTY_PRJ}/build/$${VEDERE_OS}/QtCreator/$${BUILD_CONFIG}
+ARCHA_PKG_BLD = $${OTHER_BLD}/$${ARCHA_PKG}/build/$${VEDERE_OS}/QtCreator/$${BUILD_CONFIG}
+ARCHA_PRJ_BLD = $${OTHER_BLD}/$${ARCHA_PRJ}/build/$${VEDERE_OS}/QtCreator/$${BUILD_CONFIG}
+#ARCHA_LIB = $${ARCHA_THIRDPARTY_PKG_MAKE_BLD}/lib
+#ARCHA_LIB = $${ARCHA_THIRDPARTY_PRJ_MAKE_BLD}/lib
+#ARCHA_LIB = $${ARCHA_THIRDPARTY_PKG_BLD}/lib
+#ARCHA_LIB = $${ARCHA_THIRDPARTY_PRJ_BLD}/lib
+#ARCHA_LIB = $${ARCHA_PKG_BLD}/lib
+ARCHA_LIB = $${ARCHA_PRJ_BLD}/lib
+#ARCHA_LIB = $${VEDERE_LIB}
+
+# archa LIBS
+#
+archa_LIBS += \
+-L$${ARCHA_LIB}/lib$${ARCHA_NAME} \
+-l$${ARCHA_NAME} \
+
+########################################################################
 # crono
 CRONO_THIRDPARTY_PKG_MAKE_BLD = $${CRONO_THIRDPARTY_PKG}/build/$${VEDERE_OS}/$${BUILD_CONFIG}
 CRONO_THIRDPARTY_PRJ_MAKE_BLD = $${CRONO_THIRDPARTY_PRJ}/build/$${VEDERE_OS}/$${BUILD_CONFIG}
@@ -249,6 +293,8 @@ $${forma_LIBS} \
 $${rete_LIBS} \
 $${fila_LIBS} \
 $${crono_LIBS} \
+$${archa_LIBS} \
+$${arbora_LIBS} \
 $${nadir_LIBS} \
 $${rostra_LIBS} \
 $${build_vedere_LIBS} \
