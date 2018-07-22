@@ -24,6 +24,7 @@
 #include "xos/app/gui/vedere/main_window_extend.hpp"
 #include "xos/app/gui/vedere/image/format.hpp"
 #include "xos/graphic/image/format/png/libpng/pixel/bgra_reader.hpp"
+#include "xos/graphic/image/format/jpeg/libjpeg/pixel/bgra_reader.hpp"
 
 namespace xos {
 namespace app {
@@ -65,6 +66,37 @@ public:
         return false;
     }
     virtual bool load_bmp_image(io::byte_reader& in) {
+        return false;
+    }
+
+    virtual bool load_dng_image(FILE* in) {
+        return false;
+    }
+    virtual bool load_png_image(FILE* in) {
+        graphic::image::format::png::libpng::pixel::bgra_reader reader(in);
+        if ((reader.read())) {
+            if ((this->load_image(reader))) {
+                return true;
+            }
+        }
+        return false;
+    }
+    virtual bool load_jpeg_image(FILE* in) {
+        graphic::image::format::jpeg::libjpeg::pixel::bgra_reader reader(in);
+        if ((reader.read())) {
+            if ((this->load_image(reader))) {
+                return true;
+            }
+        }
+        return false;
+    }
+    virtual bool load_tiff_image(FILE* in) {
+        return false;
+    }
+    virtual bool load_gif_image(FILE* in) {
+        return false;
+    }
+    virtual bool load_bmp_image(FILE* in) {
         return false;
     }
 };

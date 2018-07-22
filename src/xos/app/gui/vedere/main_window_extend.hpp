@@ -51,7 +51,10 @@ public:
             io::crt::file::byte_reader in;
             
             if ((in.open(file))) {
-                success = load_image(width, height, depth, in, format);
+                FILE* file = 0;
+                if ((file = in.attached_to())) {
+                    success = load_image(width, height, depth, file, format);
+                }
                 in.close();
             }
         } else {
@@ -62,6 +65,38 @@ public:
     virtual bool load_image
     (size_t width, size_t height, size_t depth, 
      io::byte_reader& in, image::format_t format) {
+        bool success = false;
+        switch (format) {
+        case image::format_raw:
+            success = load_image(in, width, height, depth);
+            break;
+        case image::format_dng:
+            success = load_dng_image(in);
+            break;
+        case image::format_png:
+            success = load_png_image(in);
+            break;
+        case image::format_jpeg:
+            success = load_jpeg_image(in);
+            break;
+        case image::format_tiff:
+            success = load_tiff_image(in);
+            break;
+        case image::format_gif:
+            success = load_gif_image(in);
+            break;
+        case image::format_bmp:
+            success = load_bmp_image(in);
+            break;
+        default:
+            LOG_ERROR("...unexpected format = " << format << "");
+            break;
+        }
+        return success;
+    }
+    virtual bool load_image
+    (size_t width, size_t height, size_t depth, 
+     FILE* in, image::format_t format) {
         bool success = false;
         switch (format) {
         case image::format_raw:
@@ -111,6 +146,25 @@ public:
         return false;
     }
 
+    virtual bool load_dng_image(FILE* in) {
+        return false;
+    }
+    virtual bool load_png_image(FILE* in) {
+        return false;
+    }
+    virtual bool load_jpeg_image(FILE* in) {
+        return false;
+    }
+    virtual bool load_tiff_image(FILE* in) {
+        return false;
+    }
+    virtual bool load_gif_image(FILE* in) {
+        return false;
+    }
+    virtual bool load_bmp_image(FILE* in) {
+        return false;
+    }
+
     virtual bool load_image(graphic::image::format::pixel::bytes::reader& in) {
         size_t image_width = 0, image_height = 0, image_depth = 0, image_size = 0;
         byte_t* bytes = 0;
@@ -133,6 +187,10 @@ public:
 
     virtual void* load_image
     (io::byte_reader& in, size_t size, size_t width, size_t height) {
+        return 0;
+    }
+    virtual void* load_image
+    (FILE* in, size_t size, size_t width, size_t height) {
         return 0;
     }
     virtual void* set_image
