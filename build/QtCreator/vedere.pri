@@ -29,6 +29,27 @@ HOME = /home/jboyd
 }
 
 ########################################################################
+# giflib
+#
+# pkg-config --cflags --libs giflib
+#
+
+# build giflib INCLUDEPATH
+#
+build_giflib_INCLUDEPATH += \
+$${HOME}/build/giflib/include \
+
+# build giflib DEFINES
+#
+build_giflib_DEFINES += \
+
+# build giflib LIBS
+#
+build_giflib_LIBS += \
+-L$${HOME}/build/giflib/lib \
+-lgif \
+
+########################################################################
 # libjpeg
 #
 # pkg-config --cflags --libs libjpeg
@@ -289,6 +310,7 @@ $${build_nadir_INCLUDEPATH} \
 $${build_rostra_INCLUDEPATH} \
 $${build_libpng_INCLUDEPATH} \
 $${build_libjpeg_INCLUDEPATH} \
+$${build_giflib_INCLUDEPATH} \
 
 
 # build vedere DEFINES
@@ -306,6 +328,7 @@ $${build_lamna_DEFINES} \
 $${build_plena_DEFINES} \
 $${build_libpng_DEFINES} \
 $${build_libjpeg_DEFINES} \
+$${build_giflib_DEFINES} \
 
 
 # build vedere LIBS
@@ -323,5 +346,6 @@ $${build_nadir_LIBS} \
 $${build_rostra_LIBS} \
 $${build_libpng_LIBS} \
 $${build_libjpeg_LIBS} \
+$${build_giflib_LIBS} \
 
 
