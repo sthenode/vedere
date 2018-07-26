@@ -25,6 +25,7 @@
 #include "xos/app/gui/vedere/image/format.hpp"
 #include "xos/graphic/image/format/png/libpng/pixel/bgra_reader.hpp"
 #include "xos/graphic/image/format/jpeg/libjpeg/pixel/bgra_reader.hpp"
+#include "xos/graphic/image/format/gif/giflib/pixel/bgra_reader.hpp"
 
 namespace xos {
 namespace app {
@@ -38,66 +39,121 @@ template <class TExtends>
 class _EXPORT_CLASS main_windowt: public TExtends {
 public:
     typedef TExtends extends;
+    typedef main_windowt derives;
 
     main_windowt() {
     }
     virtual ~main_windowt() {
     }
 
-    virtual bool load_dng_image(io::byte_reader& in) {
+    virtual bool load_dng_image(io::byte_reader& reader) {
         return false;
     }
-    virtual bool load_png_image(io::byte_reader& in) {
-        graphic::image::format::png::libpng::pixel::bgra_reader reader(in);
-        if ((reader.read())) {
-            if ((this->load_image(reader))) {
+    virtual bool load_png_image(io::byte_reader& reader) {
+        graphic::image::format::png::libpng::pixel::bgra_reader bgra_reader(reader);
+        if ((bgra_reader.read())) {
+            if ((this->load_image(bgra_reader))) {
                 return true;
             }
         }
         return false;
     }
-    virtual bool load_jpeg_image(io::byte_reader& in) {
+    virtual bool load_jpeg_image(io::byte_reader& reader) {
         return false;
     }
-    virtual bool load_tiff_image(io::byte_reader& in) {
+    virtual bool load_tiff_image(io::byte_reader& reader) {
         return false;
     }
-    virtual bool load_gif_image(io::byte_reader& in) {
+    virtual bool load_gif_image(io::byte_reader& reader) {
         return false;
     }
-    virtual bool load_bmp_image(io::byte_reader& in) {
+    virtual bool load_bmp_image(io::byte_reader& reader) {
         return false;
     }
 
-    virtual bool load_dng_image(FILE* in) {
+    virtual bool load_dng_image(FILE* file) {
         return false;
     }
-    virtual bool load_png_image(FILE* in) {
-        graphic::image::format::png::libpng::pixel::bgra_reader reader(in);
-        if ((reader.read())) {
-            if ((this->load_image(reader))) {
+    virtual bool load_png_image(FILE* file) {
+        return load_png_image_file(file);
+    }
+    virtual bool load_jpeg_image(FILE* file) {
+        return load_jpeg_image_file(file);
+    }
+    virtual bool load_tiff_image(FILE* file) {
+        return false;
+    }
+    virtual bool load_gif_image(FILE* file) {
+        return false;
+    }
+    virtual bool load_bmp_image(FILE* file) {
+        return false;
+    }
+    
+    virtual bool load_dng_image(const char* filename) {
+        return false;
+    }
+    virtual bool load_png_image(const char* filename) {
+        return load_image_filename(&derives::load_png_image_file, filename);
+    }
+    virtual bool load_jpeg_image(const char* filename) {
+        return load_image_filename(&derives::load_jpeg_image_file, filename);
+    }
+    virtual bool load_tiff_image(const char* filename) {
+        return false;
+    }
+    virtual bool load_gif_image(const char* filename) {
+        graphic::image::format::gif::giflib::pixel::bgra_reader bgra_reader;
+        if ((bgra_reader.read(filename))) {
+            if ((this->load_image(bgra_reader))) {
                 return true;
             }
         }
         return false;
     }
-    virtual bool load_jpeg_image(FILE* in) {
-        graphic::image::format::jpeg::libjpeg::pixel::bgra_reader reader(in);
-        if ((reader.read())) {
-            if ((this->load_image(reader))) {
+    virtual bool load_bmp_image(const char* filename) {
+        return false;
+    }
+
+protected:
+    virtual bool load_png_image_file(FILE* file) {
+        graphic::image::format::png::libpng::pixel::bgra_reader bgra_reader(file);
+        if ((bgra_reader.read())) {
+            if ((this->load_image(bgra_reader))) {
                 return true;
             }
         }
         return false;
     }
-    virtual bool load_tiff_image(FILE* in) {
+    virtual bool load_jpeg_image_file(FILE* file) {
+        graphic::image::format::jpeg::libjpeg::pixel::bgra_reader bgra_reader(file);
+        if ((bgra_reader.read())) {
+            if ((this->load_image(bgra_reader))) {
+                return true;
+            }
+        }
         return false;
     }
-    virtual bool load_gif_image(FILE* in) {
-        return false;
-    }
-    virtual bool load_bmp_image(FILE* in) {
-        return false;
+
+protected:
+    virtual bool load_image_filename
+    (bool (derives::*load_image_file)(FILE* file), const char* filename) {
+        bool success = false;
+
+        if ((load_image_file) && (filename) && (filename[0])) {
+            io::crt::file::byte_reader reader;
+            
+            if ((reader.open(filename))) {
+                FILE* file = 0;
+                if ((file = reader.attached_to())) {
+                    success = (this->*load_image_file)(file);
+                }
+                reader.close();
+            }
+        } else {
+            LOG_ERROR("...failed on ((load_image_file) && (filename) && (filename[0]))");
+        }
+        return success;
     }
 };
 
